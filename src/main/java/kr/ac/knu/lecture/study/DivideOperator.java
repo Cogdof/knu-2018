@@ -1,7 +1,6 @@
 package kr.ac.knu.lecture.study;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,7 +14,7 @@ public class DivideOperator {
     public int divide(int a, int b) {
         try {
             return a / b;
-        } catch(ArithmeticException e) {
+        } catch (ArithmeticException e) {
             return arithmeticExceptionHandler.handlerException(a);
         }
     }

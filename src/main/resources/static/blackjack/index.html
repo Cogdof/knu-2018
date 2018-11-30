@@ -402,25 +402,42 @@
         color: green;
         font-size: 21px;
     }
+
 </style>
 </head>
-<body>
+<body> <!-- 여기서부터!-->
+<div class="buttons">
+    <div class="btn" id="logout_button">Logout</div>
+</div>
+
 <div class="page" id="login">
     <div>
-        <div class="buttons"><div class="btn" id="login_button">Login/Signup</div></div>
+        <img src="blackjack.jpg", align="center">
+        <div class="buttons">
+
+            <div class="btn" id="login_button">Login/Signup</div>
+        </div>
     </div>
 </div>
 <div class="page" id="lobby" style="display: none">
     <div>
-        <div class="buttons"><div class="btn" id="create_room_button">Create</div></div>
+
+        <div class="buttons">
+            <div class="btn" id="create_room_button">Create</div>
+        </div>
     </div>
 </div>
 <div class="page" id="game" style="display: none">
     <div class="dealer-cards"></div>
     <div class="clear"></div>
     <div class="player-cards"></div>
-    <div class="buttons"><div class="btn" id="hit">Hit</div><div class="btn" id="stand">Stand</div></div>
-    <div class="buttons"><div class="btn" id="deal">Deal</div></div>
+    <div class="buttons">
+        <div class="btn" id="hit">Hit</div>
+        <div class="btn" id="stand">Stand</div>
+    </div>
+    <div class="buttons">
+        <div class="btn" id="deal">Deal</div>
+    </div>
     <div class="betting-area">
         <b>Your Bet</b><br>
         <div id="bet" class="bet money">0</div>
@@ -449,8 +466,8 @@
         contentType:'application/json;'
     }).done(function(data) {
         if (data && data.name) {
-            $('#login').hide();
-            $('#lobby').show();
+            $('#login').hide(); //로그인 화면을 감추고
+            $('#lobby').show(); //로비 화면(크리에이트) 화면을 보인다.
             user = data;
         }
     });
@@ -458,6 +475,11 @@
     $('#login_button').click(function() {
         location.href = '/login'
     })
+      $('#logout_button').click(function() {
+        location.href = '/logout'
+    })
+
+//----------------- 로그아웃 구현
 
     $('#create_room_button').click(function() {
         $.ajax({
@@ -468,14 +490,14 @@
             $('#lobby').hide();
             $('#game').show();
             gameRoomId = data.roomId;
-            drawGameRoom(data);
+            drawGameRoom(data); // 게임을 그려주는 부분
         });
     })
 
     $('#deal').click(function() {
         var bet = parseInt($('#bet').html());
 
-        $.ajax({
+        $.ajax({ //배팅금액을 가져와서 json 형식으로 서버에 보내줌.  request payload 로 보내줌. 그래서 response body 로 bet money로 보내는것.
             type: 'POST',
             url: '/api/black-jack/rooms/' + gameRoomId + '/bet',
             data: JSON.stringify(bet),
@@ -505,7 +527,7 @@
 
     $('#more').click(function(){
         var bet = 100;
-        var currentBet = parseInt($('#bet').html());
+        var currentBet = parseInt($('#bet').html()); //배팅금액
         var money = parseInt($('#money').html());
         if (money < bet) {
             bet = money;
@@ -612,6 +634,7 @@
 
         return "<div class='card " + className + "' data-value='" + rank +"'></div>";
     }
+
 </script>
 
 </html>

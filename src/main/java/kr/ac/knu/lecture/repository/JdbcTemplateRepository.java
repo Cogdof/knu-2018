@@ -19,16 +19,16 @@ public class JdbcTemplateRepository {
     private final JdbcTemplate jdbcTemplate;
 
     public String getTitleById(long nid) throws SQLException {
-Connection connection = dataSource.getConnection();
-PreparedStatement pst = connection.prepareStatement("SELECT title FROM board where id = ?", new String[]{String.valueOf(nid)});
+        Connection connection = dataSource.getConnection();
+        PreparedStatement pst = connection.prepareStatement("SELECT title FROM board where id = ?", new String[]{String.valueOf(nid)});
 
-pst.executeQuery();
+        pst.executeQuery();
 
-return jdbcTemplate
-        .queryForObject(
-                "SELECT title " +
-                        "FROM board " +
-                        "LIMIT 10",
-                new Object[] {nid}, String.class);
+        return jdbcTemplate
+                .queryForObject(
+                        "SELECT title " +
+                                "FROM board " +
+                                "LIMIT 10",
+                        new Object[]{nid}, String.class);
     }
 }

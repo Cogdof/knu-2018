@@ -2,18 +2,24 @@ package kr.ac.knu.lecture.service;
 
 import kr.ac.knu.lecture.domain.User;
 import kr.ac.knu.lecture.game.blackjack.Deck;
-import kr.ac.knu.lecture.game.blackjack.Evaluator;
 import kr.ac.knu.lecture.game.blackjack.GameRoom;
+import kr.ac.knu.lecture.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by rokim on 2018. 11. 30..
  */
 @Service
+@AllArgsConstructor
 public class BlackjackService {
+
+    private final UserRepository userRepository;
     private final int DECK_NUMBER = 1;
     private final Map<String, GameRoom> gameRoomMap = new HashMap<>();
 
@@ -56,6 +62,7 @@ public class BlackjackService {
 
         gameRoom.hit(user.getName());
 
+        updateGameResult(gameRoom);
         return gameRoom;
     }
 
@@ -65,6 +72,22 @@ public class BlackjackService {
         gameRoom.stand(user.getName());
         gameRoom.playDealer();
 
+        updateGameResult(gameRoom);
         return gameRoom;
     }
+
+    public void updateGameResult(GameRoom gameRoom){
+        if(gameRoom.isFinished()){
+            gameRoom.getPlayerList().forEach((loginId,player)->{
+                User playUser = userRepository.findById(loginId).orElseThrow(()->new RuntimeException());
+                playUser.setAccount(player.getBalance());
+
+                userRepository.save(playUser);
+            });
+        }
+    }
+
+
+
+
 }
