@@ -5,5 +5,6 @@ package kr.ac.knu.lecture.domain;
  */
 public enum OAuthProvider {
     FACEBOOK,
-    GITHUB
+    GITHUB,
+    NAVER
 }

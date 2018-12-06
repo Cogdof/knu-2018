@@ -58,7 +58,6 @@ public class Player {
     }
 
     public Card hitCard() {
-
         return hand.drawCard();
     }
 

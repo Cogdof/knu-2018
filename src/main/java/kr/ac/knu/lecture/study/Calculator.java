@@ -1,5 +1,6 @@
 package kr.ac.knu.lecture.study;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**

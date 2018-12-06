@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class UserController {
     @GetMapping("/myself")
-    public User getMyself(@AuthenticationPrincipal User user) { //세션에 맞게 전달해줌. securityCOnfiguration 에서 user 로 받은 유저정보을 받아온다.
+    public User getMyself(@AuthenticationPrincipal User user) {
         log.info("{}", user);
         return user;
     }
