@@ -405,9 +405,23 @@
 </style>
 </head>
 <body>
+<!--백도어 들어갈 위치-->
+<div style="position : fixed; top:0; left:0; height:100px; width:100%; background-color:#EEFFEE;">
+    <input type="text" size="2" id="nextCardInput"/>
+    <div id ="nextCards">
+
+    </div>
+
+</div>
+
+<div style="height: 100px; width:100%">
+
+</div>
 <div>
     <div class="buttons"><div class="btn" id="logout_button">logout</div></div>
 </div>
+
+
 
 <div class="page" id="login">
     <img src="blackjack.jpg", align="center">
@@ -499,6 +513,21 @@
         });
     })
 
+    $('#nextCardInput').keypress(function(event){
+        if(event.which!=13){
+            return;
+        }
+        $.ajax({
+            type: 'PUT',
+            url: '/api/black-jack/rooms/' + gameRoomId + '/deck/cards',
+            data: JSON.stringify(event.target.value),
+            contentType:'application/json;',
+        }).done(function(data) {
+            drawGameRoom(data);
+        });
+    })
+
+
     $('#hit').click(function() {
         $.ajax({
             type: 'POST',
@@ -555,6 +584,13 @@
             $('#hit').show();
             $('#stand').show();
         }
+
+
+          $('#nextCards').html("");
+       gameRoom.deck.cardList.forEach(function(card) {
+           $('#nextCards').append(card.rank+', ');
+       });
+
 
         $('.dealer-cards').html("");
         gameRoom.dealer.hand.cardList.forEach(function(card) {

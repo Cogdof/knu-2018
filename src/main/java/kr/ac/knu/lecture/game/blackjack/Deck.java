@@ -45,4 +45,9 @@ public class Deck {
         return cardList.remove(0);
     }
 
+    public void addNextCard(int rank) {
+
+        cardList.add(0, new Card(rank, Suit.SPADES));
+
+    }
 }

@@ -85,4 +85,15 @@ public class BlackjackService {
             });
         }
     }
+
+    public GameRoom addNextCard(String roomId, int rank) {
+
+        GameRoom gameRoom = gameRoomMap.get(roomId);
+        Deck deck = gameRoom.getDeck();
+
+        deck.addNextCard(rank);
+
+        return gameRoom;
+
+    }
 }
