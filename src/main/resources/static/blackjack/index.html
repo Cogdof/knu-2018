@@ -141,6 +141,9 @@
         -webkit-box-shadow: none;
     }
 
+    #doubledown {
+        visibility:hidden;
+    }
     .card {
         background-image: url(/blackjack/cards.png);
         float: left;
@@ -441,6 +444,8 @@
     <div class="player-cards"></div>
     <div class="buttons"><div class="btn" id="hit">Hit</div><div class="btn" id="stand">Stand</div></div>
     <div class="buttons"><div class="btn" id="deal">Deal</div></div>
+    <div class="buttons"><div class="btn" id="doubledown">Doubledown</div></div>
+
     <div class="betting-area">
         <b>Your Bet</b><br>
         <div id="bet" class="bet money">0</div>
@@ -462,6 +467,7 @@
 <script>
     var user;
     var gameRoomId;
+    var gameRoomForConsoleLog;
 
     $.ajax({
         type: 'GET',
@@ -512,6 +518,16 @@
             drawGameRoom(data);
         });
     })
+
+    $('#doubledown').click(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/api/black-jack/rooms/' + gameRoomId + '/doubledown',
+        }).done(function(data) {
+            drawGameRoom(data);
+        });
+    })
+
 
     $('#nextCardInput').keypress(function(event){
         if(event.which!=13){
@@ -571,6 +587,16 @@
     });
 
     function drawGameRoom(gameRoom) {
+
+        console.log(gameRoom);
+        gameRoomForConsoleLog = gameRoom;
+
+        if( (gameRoom.playerList[user.name].hand.cardList.length==2)){
+            $("#doubledown").css("visibility", "visible");
+        } else {
+            $("#doubledown").css("visibility", "hidden");
+        }
+
         if (gameRoom.finished) {
             $('#deal').show();
             $('#more').show();
@@ -586,7 +612,7 @@
         }
 
 
-          $('#nextCards').html("");
+        $('#nextCards').html("");
        gameRoom.deck.cardList.forEach(function(card) {
            $('#nextCards').append(card.rank+', ');
        });
