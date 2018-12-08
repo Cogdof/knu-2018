@@ -14,26 +14,14 @@ public class Evaluator {
         this.dealer = dealer;
     }
 
-    public boolean cardSumExceedStandard(){
+    public boolean cardSumExceedStandard(Player player){
 
-
-
-
-        playerMap.forEach((s, player) -> {
-            int playerResult = player.getHand().getCardSum();
-            if (playerResult > 21) {
-
-                player.lost();
-            } else if (playerResult > dealerResult) {
-                player.win();
-            } else if (playerResult == dealerResult) {
-                player.tie();
-            } else {
-                player.lost();
-            }
-        });
-
-
+        int playerResult = player.getHand().getCardSum();
+        if (playerResult > 21) {
+            player.lost();
+            return true;
+        }
+        return false;
     }
 
     public boolean evaluate() {
