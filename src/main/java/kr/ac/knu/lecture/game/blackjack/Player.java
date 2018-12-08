@@ -88,4 +88,11 @@ public class Player {
     public Card doubledown() {
         return hitCard();
     }
+
+    public void blackjack_win() {
+        balance += currentBet + (currentBet*1.5);
+        currentBet = 0;
+        isPlaying = false;
+
+    }
 }
