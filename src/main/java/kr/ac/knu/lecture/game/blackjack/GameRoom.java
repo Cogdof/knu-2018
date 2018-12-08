@@ -81,4 +81,13 @@ public class GameRoom {
         evaluator.evaluate();
         this.isFinished = true;
     }
+
+    public void checkBlackjack(String name) {
+        Player player = playerList.get(name);
+        if(evaluator.evaluate_blackjack(player)){
+            this.isFinished = true;
+        }
+
+
+    }
 }

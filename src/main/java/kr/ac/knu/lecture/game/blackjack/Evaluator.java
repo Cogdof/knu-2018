@@ -42,6 +42,22 @@ public class Evaluator {
 
         return true;
     }
+    public boolean evaluate_blackjack(Player player) {
+
+
+        int playerResult = player.getHand().getCardSum();
+        int playerHand = player.getHand().handSize();
+
+        if (playerResult == 21 && playerHand==2) {
+            player.blackjack_win();
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
 
 
 }
