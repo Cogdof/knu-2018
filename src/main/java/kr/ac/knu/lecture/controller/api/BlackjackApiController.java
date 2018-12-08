@@ -50,12 +50,8 @@ public class BlackjackApiController {
     @PostMapping("/rooms/{roomId}/doubledown")
     public GameRoom doubledown(@AuthenticationPrincipal User user, @PathVariable String roomId) {
 
-//        User currentUser = userRepository.getOne(user.getName());
-//        return blackjackService.doubledown(roomId, currentUser);
-
-        System.out.println("doubledown");
-
-        return null;
+        User currentUser = userRepository.getOne(user.getName());
+        return blackjackService.doubledown(roomId, currentUser);
     }
 
     @PutMapping("/rooms/{roomId}/deck/cards")

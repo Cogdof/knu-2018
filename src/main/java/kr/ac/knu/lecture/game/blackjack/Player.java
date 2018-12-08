@@ -38,6 +38,16 @@ public class Player {
         isPlaying = true;
     }
 
+    public void doubleBet(){
+        if (balance < currentBet){
+            throw new NotEnoughBalanceException();
+        }
+        balance -= currentBet;
+        currentBet = currentBet*2;
+
+        isPlaying = false;
+    }
+
     public void deal() {
         hand.drawCard();
         hand.drawCard();
@@ -65,4 +75,7 @@ public class Player {
         this.isPlaying = false;
     }
 
+    public Card doubledown() {
+        return hitCard();
+    }
 }

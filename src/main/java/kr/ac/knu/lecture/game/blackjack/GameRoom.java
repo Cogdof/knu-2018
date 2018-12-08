@@ -64,6 +64,12 @@ public class GameRoom {
         return player.hitCard();
     }
 
+    public Card doubledown(String name) {
+        Player player = playerList.get(name);
+        player.doubleBet();
+        return player.doubledown();
+    }
+
     public void stand(String name) {
         Player player = playerList.get(name);
 
@@ -75,5 +81,4 @@ public class GameRoom {
         evaluator.evaluate();
         this.isFinished = true;
     }
-
 }
