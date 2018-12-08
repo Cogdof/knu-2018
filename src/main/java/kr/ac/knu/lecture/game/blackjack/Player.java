@@ -7,6 +7,11 @@ import lombok.Getter;
  * Created by rokim on 2018. 5. 26..
  */
 public class Player {
+
+    public static int WIN = 0;
+    public static int TIE = 1;
+    public static int LOST = 2;
+
     @Getter
     private long balance;
     @Getter
@@ -15,6 +20,8 @@ public class Player {
     private boolean isPlaying;
     @Getter
     private Hand hand;
+    @Getter
+    private int gameStatus = -1;
 
     public Player(long seedMoney, Hand hand) {
         this.balance = seedMoney;
@@ -54,16 +61,19 @@ public class Player {
     }
 
     public void win() {
+        gameStatus = WIN;
         balance += currentBet * 2;
         currentBet = 0;
     }
 
     public void tie() {
+        gameStatus = TIE;
         balance += currentBet;
         currentBet = 0;
     }
 
     public void lost() {
+        gameStatus = LOST;
         currentBet = 0;
     }
 

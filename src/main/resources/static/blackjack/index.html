@@ -405,6 +405,11 @@
         color: green;
         font-size: 21px;
     }
+
+
+    #GameResult{
+        visibility:hidden;
+    }
 </style>
 </head>
 <body>
@@ -446,13 +451,18 @@
     <div class="buttons"><div class="btn" id="deal">Deal</div></div>
     <div class="buttons"><div class="btn" id="doubledown">Doubledown</div></div>
 
+
+
     <div class="betting-area">
+        <div><b id="GameResult"></b></div>
+
         <b>Your Bet</b><br>
         <div id="bet" class="bet money">0</div>
         <div>
             <div class="btn" id="more">+</div>
             <div class="btn" id="less">-</div>
         </div>
+
         <div class="clear"></div>
     </div>
     <div>
@@ -603,12 +613,28 @@
             $('#less').show();
             $('#hit').hide();
             $('#stand').hide();
+
+            $('#GameResult').css('visibility', 'visible');
+
+            switch(gameRoomForConsoleLog.playerList[user.name].gameStatus){
+                case 0 :
+                    $('#GameResult').html('You Win');
+                    break;
+                case 1 :
+                    $('#GameResult').html('You Tie');
+                    break;
+                case 2 :
+                    $('#GameResult').html('You Lost');
+                    break;
+            }
         } else {
             $('#deal').hide();
             $('#more').hide();
             $('#less').hide();
             $('#hit').show();
             $('#stand').show();
+            $('#GameResult').css('visibility', 'hidden');
+
         }
 
 
