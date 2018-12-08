@@ -508,13 +508,16 @@
             type: 'POST',
             url: '/api/black-jack/rooms',
         }).done(function(data) {
+
             $('#login').hide();
             $('#lobby').hide();
             $('#game').show();
             gameRoomId = data.roomId;
             drawGameRoom(data);
+
         });
     })
+
 
     $('#deal').click(function() {
         var bet = parseInt($('#bet').html());
@@ -628,6 +631,7 @@
                     break;
             }
         } else {
+
             $('#deal').hide();
             $('#more').hide();
             $('#less').hide();
