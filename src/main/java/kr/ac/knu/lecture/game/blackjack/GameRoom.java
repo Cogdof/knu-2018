@@ -61,7 +61,16 @@ public class GameRoom {
     public Card hit(String name) {
         Player player = playerList.get(name);
 
-        return player.hitCard();
+        Card card = player.hitCard();
+
+        boolean isCardSumExceedStandard = evaluator.cardSumExceedStandard(player);
+        if(isCardSumExceedStandard){
+            player.stand();
+            this.isFinished = true;
+        }
+
+        return card;
+
     }
 
     public Card doubledown(String name) {
@@ -72,7 +81,6 @@ public class GameRoom {
 
     public void stand(String name) {
         Player player = playerList.get(name);
-
         player.stand();
     }
 

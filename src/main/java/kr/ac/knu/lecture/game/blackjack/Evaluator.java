@@ -14,6 +14,16 @@ public class Evaluator {
         this.dealer = dealer;
     }
 
+    public boolean cardSumExceedStandard(Player player){
+
+        int playerResult = player.getHand().getCardSum();
+        if (playerResult > 21) {
+            player.lost();
+            return true;
+        }
+        return false;
+    }
+
     public boolean evaluate() {
         if (playerMap.values().stream().anyMatch(player -> player.isPlaying())) {
             return false;
