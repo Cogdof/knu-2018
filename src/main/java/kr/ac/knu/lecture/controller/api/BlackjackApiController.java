@@ -46,11 +46,22 @@ public class BlackjackApiController {
         User currentUser = userRepository.getOne(user.getName());
         return blackjackService.stand(roomId, currentUser);
     }
+
+    @PostMapping("/rooms/{roomId}/doubledown")
+    public GameRoom doubledown(@AuthenticationPrincipal User user, @PathVariable String roomId) {
+
+//        User currentUser = userRepository.getOne(user.getName());
+//        return blackjackService.doubledown(roomId, currentUser);
+
+        System.out.println("doubledown");
+
+        return null;
+    }
+
     @PutMapping("/rooms/{roomId}/deck/cards")
     public GameRoom addNextCard(@PathVariable String roomId, @RequestBody int rank){
         return blackjackService.addNextCard(roomId, rank);
     }
-
 
     @GetMapping("/rooms/{roomId}")
     public GameRoom getGameRoomData(@PathVariable String roomId) {
