@@ -437,12 +437,12 @@
         <div class="buttons"><div class="btn" id="naver_login_button">Naver 로그인</div></div>
         <div class="buttons"><div class="btn" id="github_login_button">Github 로그인</div></div>
     </div>
-</div>
+</div> <!-- 로그인 버튼들 -->
 <div class="page" id="lobby" style="display: none">
     <div>
         <div class="buttons"><div class="btn" id="create_room_button">Create</div></div>
     </div>
-</div>
+</div> <!-- 방 만들기 버튼 -->
 <div class="page" id="game" style="display: none">
     <div class="dealer-cards"></div>
     <div class="clear"></div>
@@ -489,19 +489,19 @@
             $('#lobby').show();
             user = data;
         }
-    });
+    }); // 로그인 완료할 시에 login이 아닌 lobby를 보여준다.
 
     $('#naver_login_button').click(function() {
         location.href = '/login/naver'
-    })
+    }) // naver 버튼 누를시 link 변경
 
     $('#github_login_button').click(function() {
         location.href = '/login/github'
-    })
+    }) // github 버튼 누를시 link 변경
 
     $('#logout_button').click(function() {
         location.href = '/logout'
-    })
+    }) // logout 버튼 누를시 link 변경
 
     $('#create_room_button').click(function() {
         $.ajax({
@@ -516,7 +516,7 @@
             drawGameRoom(data);
 
         });
-    })
+    }) // 방 만들기를 클릭하면 room url로 가서 게임이 만들어진다.
 
 
     $('#deal').click(function() {
@@ -530,16 +530,16 @@
         }).done(function(data) {
             drawGameRoom(data);
         });
-    })
+    }) // deal 버튼을 클릭하면 bet만큼 보내어, bet으로 연결되고, 게임이 시작된다.
 
     $('#doubledown').click(function() {
         $.ajax({
             type: 'POST',
-            url: '/api/black-jack/rooms/' + gameRoomId + '/doubledown',
+            url: '/api/black-jack/rooms/' + gameRoomId + '/doubleDown',
         }).done(function(data) {
             drawGameRoom(data);
         });
-    })
+    }) // doubleDown 버튼을 클릭하면 doubleDown이 실행된다.
 
 
     $('#nextCardInput').keypress(function(event){
@@ -554,7 +554,7 @@
         }).done(function(data) {
             drawGameRoom(data);
         });
-    })
+    }) // 다음 카드를 추가하는 행동을 함.
 
 
     $('#hit').click(function() {
@@ -564,7 +564,7 @@
         }).done(function(data) {
             drawGameRoom(data);
         });
-    })
+    }) // hit가 이뤄진다.
 
     $('#stand').click(function() {
         $.ajax({
@@ -573,7 +573,7 @@
         }).done(function(data) {
             drawGameRoom(data);
         });
-    })
+    }) //stand가 이뤄지고 게임이 종료된다.
 
     $('#more').click(function(){
         var bet = 100;
@@ -585,7 +585,7 @@
 
         $('#bet').html(currentBet + bet);
         $('#money').html(money - bet);
-    });
+    }); // 이곳을 수정시 bet 양을 조절할 수 있다.
 
     $('#less').click(function(){
         var bet = 100;
@@ -597,7 +597,7 @@
 
         $('#bet').html(currentBet - bet);
         $('#money').html(money + bet);
-    });
+    }); // 이곳을 수정시 bet 양을 조절할 수 있다.
 
     function drawGameRoom(gameRoom) {
 
@@ -639,13 +639,13 @@
             $('#stand').show();
             $('#GameResult').css('visibility', 'hidden');
 
-        }
+        } // 게임이 끝났을때 결과창.
 
 
         $('#nextCards').html("");
        gameRoom.deck.cardList.forEach(function(card) {
            $('#nextCards').append(card.rank+', ');
-       });
+       }); // 카드들을 펼쳐 보이기 위함
 
 
         $('.dealer-cards').html("");

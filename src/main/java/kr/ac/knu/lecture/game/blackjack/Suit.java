@@ -8,4 +8,4 @@ public enum Suit {
     HEARTS,
     CLUBS,
     DIAMONDS;
-}
+} // 각 문양들을 정의
