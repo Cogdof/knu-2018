@@ -46,11 +46,14 @@ public class Player {
     }
 
     public void doubleBet(){
+
         if (balance < currentBet){
-            throw new NotEnoughBalanceException();
+            currentBet += balance;
+            balance = 0;
+        } else {
+            balance -= currentBet;
+            currentBet = currentBet*2;
         }
-        balance -= currentBet;
-        currentBet = currentBet*2;
 
         isPlaying = false;
     }

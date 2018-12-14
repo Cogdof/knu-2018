@@ -419,8 +419,12 @@
     <div id ="nextCards">
 
     </div>
-
 </div>
+
+<div style="position : fixed; top:100px; left:0; height:100px; width:100%; background-color:#FFEEFF;">
+    <input type="text" id="betTestInput"/>  <button id="betTestButton">Test Bet</button>
+</div>
+
 
 <div style="height: 100px; width:100%">
 
@@ -533,6 +537,21 @@
             type: 'POST',
             url: '/api/black-jack/rooms/' + gameRoomId + '/bet',
             data: JSON.stringify(bet),
+            contentType:'application/json;',
+        }).done(function(data) {
+            if(data){
+                drawGameRoom(data);
+            }
+        });
+    })
+
+     $('#betTestButton').click(function() {
+        var testBet = parseInt($('#betTestInput').val());
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/black-jack/rooms/' + gameRoomId + '/bet',
+            data: JSON.stringify(testBet),
             contentType:'application/json;',
         }).done(function(data) {
             if(data){
