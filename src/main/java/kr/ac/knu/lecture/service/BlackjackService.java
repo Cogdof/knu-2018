@@ -52,6 +52,8 @@ public class BlackjackService {
         gameRoom.reset();
         gameRoom.bet(user.getName(), bet);
         gameRoom.deal();
+        //blackjack
+        gameRoom.checkBlackjack(user.getName());
 
         return gameRoom;
     }
