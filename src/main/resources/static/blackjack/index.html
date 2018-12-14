@@ -618,7 +618,14 @@
         }
 
         $('#bet').html(currentBet + bet);
-        $('#money').html(money - bet);
+
+        if(currentBet > 0 && money - bet <= 0) {
+             $('#money').html(money - bet + ' [All IN]');
+        }
+
+        else {
+             $('#money').html(money - bet);
+        }
     });
 
     $('#less').click(function(){
@@ -702,14 +709,23 @@
             $('.player-cards').append('<div id="playerTotal" class="player-total">' + gameRoom.playerList[user.name].hand.cardSum + '</div>')
         }
 
-        if(gameRoom.playerList[user.name].balance < parseInt($('#bet').html()) && gameRoom.finished ){
+
+
+
+        var balance = gameRoom.playerList[user.name].balance;
+
+        if(balance < parseInt($('#bet').html()) && gameRoom.finished ){
             $('#bet').html(gameRoom.playerList[user.name].balance);
         }
 
         if(gameRoom.finished){
-            $('#money').html( (gameRoom.playerList[user.name].balance- parseInt($('#bet').html())));
+            $('#money').html( (balance - parseInt($('#bet').html())));
         } else {
-            $('#money').html( (gameRoom.playerList[user.name].balance));
+            $('#money').html( (balance));
+        }
+
+        if(parseInt($('#bet').html()) > 0 && balance - parseInt($('#bet').html()) == 0) {
+             $('#money').html( (balance - parseInt($('#bet').html())) + '[All IN]');
         }
     }
 
