@@ -585,8 +585,12 @@
     })
 
     $('#more').click(function(){
-        var bet = 100;
+        var bet = 1000;
         var currentBet = parseInt($('#bet').html());
+
+        if(currentBet>=10000)
+            return;
+
         var money = parseInt($('#money').html());
         if (money < bet) {
             bet = money;
@@ -597,7 +601,7 @@
     });
 
     $('#less').click(function(){
-        var bet = 100;
+        var bet = 1000;
         var currentBet = parseInt($('#bet').html());
         var money = parseInt($('#money').html());
         if(currentBet < bet) {
@@ -614,6 +618,7 @@
         gameRoomForConsoleLog = gameRoom;
 
         if( (gameRoom.playerList[user.name].hand.cardList.length==2)){
+        if( (gameRoom.playerList[user.name].hand.cardList.length==2 && !gameRoom.finished)){
             $("#doubledown").css("visibility", "visible");
         } else {
             $("#doubledown").css("visibility", "hidden");
