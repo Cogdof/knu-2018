@@ -706,7 +706,11 @@
             $('#bet').html(gameRoom.playerList[user.name].balance);
         }
 
-        $('#money').html(gameRoom.playerList[user.name].balance);
+        if(gameRoom.finished){
+            $('#money').html( (gameRoom.playerList[user.name].balance- parseInt($('#bet').html())));
+        } else {
+            $('#money').html( (gameRoom.playerList[user.name].balance));
+        }
     }
 
     function generateCardDiv(rank, suit) {
