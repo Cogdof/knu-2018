@@ -426,8 +426,13 @@
 
 </div>
 <div>
+
+    <div><span id="userId"></span></div>
+    <div><span id="accountBalance"></span></div>
+
     <div class="buttons"><div class="btn" id="logout_button">logout</div></div>
 </div>
+
 
 
 
@@ -485,9 +490,13 @@
         contentType:'application/json;'
     }).done(function(data) {
         if (data && data.name) {
+            console.log(data);
+
             $('#login').hide();
             $('#lobby').show();
             user = data;
+            $("#userId").html(user.name);
+            $("#accountBalance").html(user.account);
         }
     });
 
