@@ -33,41 +33,55 @@ public class Evaluator {
 
         if (dealerResult > 21) {
             playerMap.forEach((s, player) -> player.win());
-
             return true;
         }
 
         playerMap.forEach((s, player) -> {
             int playerResult = player.getHand().getCardSum();
-            if (playerResult > 21) {
+            if (evaluateBlackjackDealer(dealerResult)) {
                 player.lost();
-            } else if (playerResult > dealerResult) {
-                player.win();
-            } else if (playerResult == dealerResult) {
-                player.tie();
-            } else {
-                player.lost();
+            }
+            else {
+                if (playerResult > 21) {
+                    player.lost();
+                } else if (playerResult > dealerResult) {
+                    player.win();
+                } else if (playerResult == dealerResult) {
+                    player.tie();
+                } else {
+                    player.lost();
+                }
             }
         });
 
         return true;
     }
-    public boolean evaluate_blackjack(Player player) {
 
+    private boolean evaluateBlackjackDealer(int dealerResult){
+        if (dealerResult == 21 && dealer.getHand().getCardList().size() == 2) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean evaluate_blackjack(Player player) {
 
         int playerResult = player.getHand().getCardSum();
         int playerHand = player.getHand().handSize();
 
         if (playerResult == 21 && playerHand==2) {
-            player.blackjack_win();
-            return true;
+            dealer.deal();
+            if (evaluateBlackjackDealer(dealer.getHand().getCardSum())) {
+                player.tie();
+                return true;
+            } else {
+                player.blackjack_win();
+                return true;
+            }
         }
+
         else{
             return false;
         }
     }
-
-
-
-
 }

@@ -93,7 +93,7 @@ public class Player {
     }
 
     public void blackjack_win() {
-        balance += currentBet + (currentBet*1.5);
+        balance += (currentBet * 1.5);
         currentBet = 0;
         isPlaying = false;
 
