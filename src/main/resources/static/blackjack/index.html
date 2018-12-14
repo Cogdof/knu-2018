@@ -407,9 +407,6 @@
     }
 
 
-    #GameResult{
-        visibility:hidden;
-    }
 </style>
 </head>
 <body>
@@ -665,22 +662,23 @@
             $('#stand').hide();
             $('#surrender').hide();
 
-            $('#GameResult').css('visibility', 'visible');
 
-            switch(gameRoomForConsoleLog.playerList[user.name].gameStatus){
+            setTimeout(function() {
+             switch(gameRoomForConsoleLog.playerList[user.name].gameStatus){
                 case 0 :
-                    $('#GameResult').html('You Win');
+                    alert('You Win');
                     break;
                 case 1 :
-                    $('#GameResult').html('You Tie');
+                    alert('You Tie');
                     break;
                 case 2 :
-                    $('#GameResult').html('You Lost');
+                    alert('You Lost');
                     break;
                  case 3 :
-                    $('#GameResult').html('You Surrender');
+                    alert('You Surrender');
                     break;
-            }
+            }}, 300)
+
         } else {
 
             $('#deal').hide();
@@ -689,7 +687,6 @@
             $('#hit').show();
             $('#stand').show();
             $('#surrender').show();
-            $('#GameResult').css('visibility', 'hidden');
 
         }
 
