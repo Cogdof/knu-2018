@@ -407,9 +407,6 @@
     }
 
 
-    #GameResult{
-        visibility:hidden;
-    }
 </style>
 </head>
 <body>
@@ -459,6 +456,7 @@
     <div class="buttons"><div class="btn" id="hit">Hit</div><div class="btn" id="stand">Stand</div></div>
     <div class="buttons"><div class="btn" id="deal">Deal</div></div>
     <div class="buttons"><div class="btn" id="doubledown">Doubledown</div></div>
+    <div class="buttons"><div class="btn" id="surrender">Surrender</div></div>
 
     <div class="betting-area">
         <div><b id="GameResult"></b></div>
@@ -605,6 +603,17 @@
         });
     })
 
+
+    $('#surrender').click(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/api/black-jack/rooms/' + gameRoomId + '/surrender',
+        }).done(function(data) {
+            drawGameRoom(data);
+        });
+    })
+
+
     $('#more').click(function(){
         var bet = 1000;
         var currentBet = parseInt($('#bet').html());
@@ -658,20 +667,25 @@
             $('#less').show();
             $('#hit').hide();
             $('#stand').hide();
+            $('#surrender').hide();
 
-            $('#GameResult').css('visibility', 'visible');
 
-            switch(gameRoomForConsoleLog.playerList[user.name].gameStatus){
+            setTimeout(function() {
+             switch(gameRoomForConsoleLog.playerList[user.name].gameStatus){
                 case 0 :
-                    $('#GameResult').html('You Win');
+                    alert('You Win');
                     break;
                 case 1 :
-                    $('#GameResult').html('You Tie');
+                    alert('You Tie');
                     break;
                 case 2 :
-                    $('#GameResult').html('You Lost');
+                    alert('You Lost');
                     break;
-            }
+                 case 3 :
+                    alert('You Surrender');
+                    break;
+            }}, 300)
+
         } else {
 
             $('#deal').hide();
@@ -679,7 +693,7 @@
             $('#less').hide();
             $('#hit').show();
             $('#stand').show();
-            $('#GameResult').css('visibility', 'hidden');
+            $('#surrender').show();
 
         }
 

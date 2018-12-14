@@ -38,7 +38,7 @@ public class Evaluator {
 
         playerMap.forEach((s, player) -> {
             int playerResult = player.getHand().getCardSum();
-            if (evaluateBlackjackDealer(dealerResult)) {
+            if (evaluateBlackjackDealer()) {
                 player.lost();
             }
             else {
@@ -57,8 +57,8 @@ public class Evaluator {
         return true;
     }
 
-    private boolean evaluateBlackjackDealer(int dealerResult){
-        if (dealerResult == 21 && dealer.getHand().getCardList().size() == 2) {
+    private boolean evaluateBlackjackDealer(){
+        if (dealer.getHand().getCardSum() == 21 && dealer.getHand().getCardList().size() == 2) {
             return true;
         }
         return false;
@@ -71,7 +71,7 @@ public class Evaluator {
 
         if (playerResult == 21 && playerHand==2) {
             dealer.deal();
-            if (evaluateBlackjackDealer(dealer.getHand().getCardSum())) {
+            if (evaluateBlackjackDealer()) {
                 player.tie();
                 return true;
             } else {
@@ -83,5 +83,16 @@ public class Evaluator {
         else{
             return false;
         }
+    }
+
+    public boolean evaluate_surrender(Player player) {
+        dealer.deal();
+        if(evaluateBlackjackDealer()){
+            player.lost();
+        }
+        else{
+            player.surrender();
+        }
+        return true;
     }
 }

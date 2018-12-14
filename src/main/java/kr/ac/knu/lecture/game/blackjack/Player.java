@@ -11,7 +11,7 @@ public class Player {
     public static int WIN = 0;
     public static int TIE = 1;
     public static int LOST = 2;
-
+    public static int SURRENDER = 3;
     @Getter
     private long balance;
     @Getter
@@ -97,5 +97,12 @@ public class Player {
         currentBet = 0;
         isPlaying = false;
 
+    }
+
+    public void surrender() {
+        gameStatus =SURRENDER;
+        balance += (currentBet * 0.5);
+        currentBet = 0;
+        this.isPlaying = false;
     }
 }
