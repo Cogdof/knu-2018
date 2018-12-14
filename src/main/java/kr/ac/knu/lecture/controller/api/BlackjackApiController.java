@@ -30,6 +30,11 @@ public class BlackjackApiController {
 
     @PostMapping(value = "/rooms/{roomId}/bet", consumes = MediaType.APPLICATION_JSON_VALUE)
     public GameRoom bet(@AuthenticationPrincipal User user, @PathVariable String roomId, @RequestBody long betMoney) {
+
+        if(betMoney > 10000){
+            return null;
+        }
+
         User currentUser = userRepository.getOne(user.getName());
         return blackjackService.bet(roomId, currentUser, betMoney);
     }

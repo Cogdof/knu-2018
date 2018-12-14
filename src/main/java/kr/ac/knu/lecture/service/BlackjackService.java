@@ -49,6 +49,7 @@ public class BlackjackService {
     public GameRoom bet(String roomId, User user, long bet) {
         GameRoom gameRoom = gameRoomMap.get(roomId);
 
+
         gameRoom.reset();
         gameRoom.bet(user.getName(), bet);
         gameRoom.deal();
