@@ -576,7 +576,7 @@
     }) //stand가 이뤄지고 게임이 종료된다.
 
     $('#more').click(function(){
-        var bet = 100;
+        var bet = 1000;
         var currentBet = parseInt($('#bet').html());
         var money = parseInt($('#money').html());
         if (money < bet) {
@@ -588,7 +588,7 @@
     }); // 이곳을 수정시 bet 양을 조절할 수 있다.
 
     $('#less').click(function(){
-        var bet = 100;
+        var bet = 1000;
         var currentBet = parseInt($('#bet').html());
         var money = parseInt($('#money').html());
         if(currentBet < bet) {
