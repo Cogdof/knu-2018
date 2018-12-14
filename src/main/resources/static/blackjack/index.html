@@ -465,7 +465,7 @@
         <div><b id="GameResult"></b></div>
 
         <b>Your Bet</b><br>
-        <div id="bet" class="bet money">5000</div>
+        <div id="bet" class="bet money">0</div>
         <div>
             <div class="btn" id="more">+</div>
             <div class="btn" id="less">-</div>
@@ -719,8 +719,15 @@
             $('.player-cards').append('<div id="playerTotal" class="player-total">' + gameRoom.playerList[user.name].hand.cardSum + '</div>')
         }
 
-        $('#bet').html(gameRoom.playerList[user.name].currentBet);
-        $('#money').html(gameRoom.playerList[user.name].balance);
+        if(gameRoom.playerList[user.name].balance < parseInt($('#bet').html()) && gameRoom.finished ){
+            $('#bet').html(gameRoom.playerList[user.name].balance);
+        }
+
+        if(gameRoom.finished){
+            $('#money').html( (gameRoom.playerList[user.name].balance- parseInt($('#bet').html())));
+        } else {
+            $('#money').html( (gameRoom.playerList[user.name].balance));
+        }
     }
 
     function generateCardDiv(rank, suit) {
