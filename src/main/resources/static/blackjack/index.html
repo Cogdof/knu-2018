@@ -630,6 +630,8 @@
 
         if(currentBet > 0 && money - bet <= 0) {
              $('#money').html(money - bet + ' [All IN]');
+             alert('ALL IN');
+
         }
 
         else {
@@ -740,6 +742,9 @@
 
         if(parseInt($('#bet').html()) > 0 && balance - parseInt($('#bet').html()) == 0) {
              $('#money').html( (balance - parseInt($('#bet').html())) + '[All IN]');
+             setTimeout(function() {
+                alert('ALL IN');
+             },500)
         }
     }
 
