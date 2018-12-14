@@ -13,10 +13,10 @@ public class Card {
     private final int rank;
     private final Suit suit;
 
-    public Card(int rank, Suit suit) {
+    public Card(int rank, Suit suit) { // 생성시
         if (rank > 13) {
             throw new NoSuchRankException();
-        }
+        } // 카드 Rank가 13이 넘지 않도록
         this.rank = rank;
         this.suit = suit;
     }
