@@ -98,4 +98,14 @@ public class GameRoom {
 
 
     }
+
+    public void surrender(String name) {
+        Player player = playerList.get(name);
+        //딜러 핸드 확인, 블랙잭시 패배
+        //아니면 \0.5배 가져오기.
+        evaluator.evaluate_surrender(player);
+        this.isFinished = true;
+
+
+    }
 }

@@ -459,6 +459,7 @@
     <div class="buttons"><div class="btn" id="hit">Hit</div><div class="btn" id="stand">Stand</div></div>
     <div class="buttons"><div class="btn" id="deal">Deal</div></div>
     <div class="buttons"><div class="btn" id="doubledown">Doubledown</div></div>
+    <div class="buttons"><div class="btn" id="surrender">Surrender</div></div>
 
     <div class="betting-area">
         <div><b id="GameResult"></b></div>
@@ -605,6 +606,17 @@
         });
     })
 
+
+    $('#surrender').click(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/api/black-jack/rooms/' + gameRoomId + '/surrender',
+        }).done(function(data) {
+            drawGameRoom(data);
+        });
+    })
+
+
     $('#more').click(function(){
         var bet = 1000;
         var currentBet = parseInt($('#bet').html());
@@ -651,6 +663,7 @@
             $('#less').show();
             $('#hit').hide();
             $('#stand').hide();
+            $('#surrender').hide();
 
             $('#GameResult').css('visibility', 'visible');
 
@@ -664,6 +677,9 @@
                 case 2 :
                     $('#GameResult').html('You Lost');
                     break;
+                 case 3 :
+                    $('#GameResult').html('You Surrender');
+                    break;
             }
         } else {
 
@@ -672,6 +688,7 @@
             $('#less').hide();
             $('#hit').show();
             $('#stand').show();
+            $('#surrender').show();
             $('#GameResult').css('visibility', 'hidden');
 
         }

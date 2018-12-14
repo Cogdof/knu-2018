@@ -90,6 +90,18 @@ public class BlackjackService {
         return gameRoom;
     }
 
+    public GameRoom surrender(String roomId, User user) {
+        GameRoom gameRoom = gameRoomMap.get(roomId);
+
+        gameRoom.surrender(user.getName());
+
+
+        updateGameResult(gameRoom);
+        return gameRoom;
+    }
+
+
+
     private void updateGameResult(GameRoom gameRoom) {
         if (gameRoom.isFinished()) {
             gameRoom.getPlayerList().forEach((loginId, player) -> {
