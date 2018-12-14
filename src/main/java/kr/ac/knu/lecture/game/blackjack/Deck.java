@@ -36,19 +36,19 @@ public class Deck {
     }
 
     public Card drawCard() {
-        //이렇게 만들면 될 것.
-//        if (cardList.size() < 10) {
-//            cardList.removeAll(cardList);
-//            createCards(number);
-//            Collections.shuffle(cardList);
-//        }
-
-        if (cardList.size() == 0) {
-            // TODO 실제 게임에서 이런 일이 절대로 일어나면 안되겠죠?
-            // 그래서 보통 게임에서는 N 장의 카드가 남으면 모든 카드를 합쳐서 다시 셔플 합니다.
-            // 코드에 그런 내용이 들어가야 함.
-            throw new NoMoreCardException();
+//        이렇게 만들면 될 것.
+        if (cardList.size() <= 10) {
+            cardList.removeAll(cardList);
+            createCards(number);
+            Collections.shuffle(cardList);
         }
+//
+//        if (cardList.size() == 0) {
+//            // TODO 실제 게임에서 이런 일이 절대로 일어나면 안되겠죠?
+//            // 그래서 보통 게임에서는 N 장의 카드가 남으면 모든 카드를 합쳐서 다시 셔플 합니다.
+//            // 코드에 그런 내용이 들어가야 함.
+//            throw new NoMoreCardException();
+//        }
         return cardList.remove(0);
     } // 카드의 수가 적으면 카드를 다시 섞고, 카드를 한장 드로우(삭제&반환)한다.
 
