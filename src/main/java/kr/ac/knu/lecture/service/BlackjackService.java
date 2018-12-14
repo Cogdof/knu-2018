@@ -4,13 +4,14 @@ import kr.ac.knu.lecture.domain.User;
 import kr.ac.knu.lecture.game.blackjack.Deck;
 import kr.ac.knu.lecture.game.blackjack.Evaluator;
 import kr.ac.knu.lecture.game.blackjack.GameRoom;
+import kr.ac.knu.lecture.repository.JdbcTemplateRepository2;
 import kr.ac.knu.lecture.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.sql.SQLException;
+import java.util.*;
 
 /**
  * Created by rokim on 2018. 11. 30..
@@ -21,12 +22,22 @@ public class BlackjackService {
     private final UserRepository userRepository;
     private final int DECK_NUMBER = 1;
     private final Map<String, GameRoom> gameRoomMap = new HashMap<>();
+    @Autowired
+    private final JdbcTemplateRepository2 jdbcTemplateRepository2;
 
-    public GameRoom createGameRoom(User user) {
+
+    public GameRoom createGameRoom(User user) throws SQLException {
         Deck deck = new Deck(DECK_NUMBER);
 
         GameRoom gameRoom = new GameRoom(deck);
         gameRoom.addPlayer(user.getName(), user.getAccount());
+
+        ArrayList<User> users = jdbcTemplateRepository2.getAllUser();
+        for(int i=0; i<users.size(); i++){
+            System.out.println(users.get(i).getName() + ", " + users.get(i).getAccount());
+        }
+
+//        gameRoom.setUserArrayList(userRepository.findAll(User.class));
 
         gameRoomMap.put(gameRoom.getRoomId(), gameRoom);
 
