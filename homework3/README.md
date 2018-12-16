@@ -26,7 +26,7 @@
 - [x] double down 기능이 있으면 좋겠네요. (Blackjack 에서 Double 이 뭔지 알아보세요.) _ need fix
 - [x] 현재 View 가 가시적이지 않네요. 화면 제일 윗쪽에 내 이름과 현재 내가 보유한 금액을 표시해 주세요.
 - [x] Blackjack 이면 1.5배를 돌려받아야 할 것 같아요.
-- [ ] 화면 한쪽에, Account 가 높은 순서대로 Ranking 이 나오면 좋겠어요.
+- [x] 화면 한쪽에, Account 가 높은 순서대로 Ranking 이 나오면 좋겠어요.
 - [x] 게임이 끝난 후 이전에 배팅했던 금액이 default bet 금액이 되면 좋겠어요.
 - [x] 현재 betting 기본 금액이 100원 이네요. 1000원으로 올려 주세요.
 - [x] betting 상한선은 10000원 입니다. (server side 에서도 체크해야 할꺼에요.)
