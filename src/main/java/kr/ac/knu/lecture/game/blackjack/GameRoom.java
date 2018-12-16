@@ -17,8 +17,6 @@ public class GameRoom {
     private final Dealer dealer;
     @Getter
     private final Map<String, Player> playerList;
-    @Getter
-    private List<User> userArrayList;
 
     @Getter
     private final Deck deck;
@@ -26,15 +24,12 @@ public class GameRoom {
     private boolean isFinished;
     private final Evaluator evaluator;
 
-    @Autowired
-    private UserRepository userRepository;
 
     public GameRoom(Deck deck) {
         this.roomId = UUID.randomUUID().toString();
         this.deck = deck;
         this.dealer = new Dealer(new Hand(deck));
         this.playerList = new HashMap<>();
-        this.userArrayList = new ArrayList<>();
         this.evaluator = new Evaluator(playerList, dealer);
         this.isFinished = true;
     }
@@ -104,11 +99,6 @@ public class GameRoom {
             this.isFinished = true;
         }
 
-
-    }
-
-    public void setUserArrayList(List<User> userArrayList) {
-        this.userArrayList = userArrayList;
 
     }
 }

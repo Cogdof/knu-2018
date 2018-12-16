@@ -23,9 +23,26 @@ public class JdbcTemplateRepository2 {
     private final DataSource dataSource;
     private final JdbcTemplate jdbcTemplate;
 
-    public ArrayList<User> getAllUser() throws SQLException {
+    public ArrayList<User> getAllUsers() throws SQLException {
         Connection connection = dataSource.getConnection();
         PreparedStatement pst = connection.prepareStatement("SELECT * FROM user");
+
+        pst.executeQuery();
+
+        ResultSet rs = pst.executeQuery();
+
+        ArrayList<User> users = new ArrayList<>();
+
+        while (rs.next()) {
+            users.add(new User(rs.getString(1), null, null, rs.getLong(2)));
+        }
+
+        return users;
+    }
+
+    public ArrayList<User> getAllUsersOrderByAccount() throws SQLException {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement pst = connection.prepareStatement("SELECT * FROM user order by account DESC");
 
         pst.executeQuery();
 

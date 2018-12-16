@@ -26,18 +26,11 @@ public class BlackjackService {
     private final JdbcTemplateRepository2 jdbcTemplateRepository2;
 
 
-    public GameRoom createGameRoom(User user) throws SQLException {
+    public GameRoom createGameRoom(User user){
         Deck deck = new Deck(DECK_NUMBER);
 
         GameRoom gameRoom = new GameRoom(deck);
         gameRoom.addPlayer(user.getName(), user.getAccount());
-
-        ArrayList<User> users = jdbcTemplateRepository2.getAllUser();
-        for(int i=0; i<users.size(); i++){
-            System.out.println(users.get(i).getName() + ", " + users.get(i).getAccount());
-        }
-
-//        gameRoom.setUserArrayList(userRepository.findAll(User.class));
 
         gameRoomMap.put(gameRoom.getRoomId(), gameRoom);
 
@@ -120,9 +113,11 @@ public class BlackjackService {
         deck.addNextCard(rank);
 
         return gameRoom;
-
     }
 
+    public ArrayList<User> getAllUsers() throws SQLException {
 
-
+        ArrayList<User> users = jdbcTemplateRepository2.getAllUsersOrderByAccount();
+        return users;
+    }
 }

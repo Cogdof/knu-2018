@@ -10,6 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by rokim on 2018. 5. 21..
@@ -26,11 +27,8 @@ public class BlackjackApiController {
 
 
     @GetMapping("/ranking")
-    public void getRankingData(){
-        System.out.println("getRankingData()!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-
-//        return blackjackService.getAllUsers();
+    public ArrayList<User> getRankingData() throws SQLException {
+        return blackjackService.getAllUsers();
     }
 
     @PostMapping("/rooms")
