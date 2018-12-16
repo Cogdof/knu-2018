@@ -9,6 +9,9 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  * Created by rokim on 2018. 5. 21..
  */
@@ -22,8 +25,14 @@ public class BlackjackApiController {
     @Autowired
     private UserRepository userRepository;
 
+
+    @GetMapping("/ranking")
+    public ArrayList<User> getRankingData() throws SQLException {
+        return blackjackService.getAllUsers();
+    }
+
     @PostMapping("/rooms")
-    public GameRoom createRoom(@AuthenticationPrincipal User user) {
+    public GameRoom createRoom(@AuthenticationPrincipal User user) throws SQLException {
         User currentUser = userRepository.getOne(user.getName());
         return blackjackService.createGameRoom(currentUser);
     }

@@ -418,8 +418,14 @@
     </div>
 </div>
 
+<!-- Test Bet -->
+<!--<div style="position : fixed; top:100px; left:0; height:100px; width:100%; background-color:#FFEEFF;">-->
+    <!--<input type="text" id="betTestInput"/>  <button id="betTestButton">Test Bet</button>-->
+<!--</div>-->
+
+<!--랭킹들어갈 위치-->
 <div style="position : fixed; top:100px; left:0; height:100px; width:100%; background-color:#FFEEFF;">
-    <input type="text" id="betTestInput"/>  <button id="betTestButton">Test Bet</button>
+    <p id="ranking"></p>
 </div>
 
 
@@ -490,13 +496,15 @@
         contentType:'application/json;'
     }).done(function(data) {
         if (data && data.name) {
-            console.log(data);
+            //console.log(data);
 
             $('#login').hide();
             $('#lobby').show();
             user = data;
             $("#userId").html(user.name);
             $("#accountBalance").html(user.account);
+
+            getRanking();
         }
     });
 
@@ -746,6 +754,8 @@
                 alert('ALL IN');
              },500)
         }
+
+        getRanking();
     }
 
     function generateCardDiv(rank, suit) {
@@ -794,6 +804,23 @@
         className += suit.toLowerCase();
 
         return "<div class='card " + className + "' data-value='" + rank +"'></div>";
+    }
+
+    function getRanking(){
+                $.ajax({
+                type: 'GET',
+                url: '/api/black-jack/ranking',
+                contentType:'application/json;'
+            }).done(function(data){
+
+                $("#ranking").html('');
+
+                for(var i=0; i<data.length; i++){
+                    $("#ranking").html( $("#ranking").html() + data[i].name + " " +data[i].account + "<br>");
+                }
+                console.log(data);
+
+            });
     }
 </script>
 

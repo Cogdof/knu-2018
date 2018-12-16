@@ -1,10 +1,11 @@
 package kr.ac.knu.lecture.game.blackjack;
 
+import kr.ac.knu.lecture.domain.User;
+import kr.ac.knu.lecture.repository.UserRepository;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by rokim on 2018. 5. 26..
@@ -16,11 +17,13 @@ public class GameRoom {
     private final Dealer dealer;
     @Getter
     private final Map<String, Player> playerList;
+
     @Getter
     private final Deck deck;
     @Getter
     private boolean isFinished;
     private final Evaluator evaluator;
+
 
     public GameRoom(Deck deck) {
         this.roomId = UUID.randomUUID().toString();
