@@ -499,6 +499,14 @@
             user = data;
             $("#userId").html(user.name);
             $("#accountBalance").html(user.account);
+
+            $.ajax({
+                type: 'GET',
+                url: '/api/black-jack/ranking',
+                contentType:'application/json;'
+            }).done(function(data){
+
+            });
         }
     });
 

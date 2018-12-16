@@ -24,6 +24,15 @@ public class BlackjackApiController {
     @Autowired
     private UserRepository userRepository;
 
+
+    @GetMapping("/ranking")
+    public void getRankingData(){
+        System.out.println("getRankingData()!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+
+//        return blackjackService.getAllUsers();
+    }
+
     @PostMapping("/rooms")
     public GameRoom createRoom(@AuthenticationPrincipal User user) throws SQLException {
         User currentUser = userRepository.getOne(user.getName());
