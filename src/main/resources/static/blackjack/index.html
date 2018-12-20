@@ -12,6 +12,7 @@
 <body>
 <!--백도어 들어갈 위치-->
 <div id="backdoor-area">
+    <h2>backdoor</h2>
     <input type="text" size="2" id="nextCardInput"/>
     <div id ="nextCards">
 
@@ -182,6 +183,7 @@
                 contentType:'application/json;',
             }).done(function(data) {
                 drawGameRoom(data);
+                $('#nextCardInput').val('');
             });
         })
 
@@ -273,6 +275,8 @@
             $('#hit').hide();
             $('#stand').hide();
             $('#surrender').hide();
+            $('#backdoor-area').hide();
+            $('#nextCardInput').val('');
 
             setTimeout(function() {
              switch(gameRoomForConsoleLog.playerList[user.name].gameStatus){
@@ -291,14 +295,13 @@
             }}, 300)
 
         } else {
-
             $('#deal').hide();
             $('#more').hide();
             $('#less').hide();
             $('#hit').show();
             $('#stand').show();
             $('#surrender').show();
-
+            $('#backdoor-area').show();
         }
 
         $('#nextCards').html("");

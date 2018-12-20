@@ -407,12 +407,13 @@
 
     #backdoor-area {
         position : fixed;
-        top:0;
-        left:0;
-        height:100px;
-        width:100%;
+        top:10px;
+        left:15px;
+        height:250px;
+        width:20%;
         background-color:#EEFFEE;
         display:none;
+        padding:15px;
     }
 
     #ranking-area {
