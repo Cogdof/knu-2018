@@ -263,9 +263,9 @@
         $("#ranking-area").show();
 
         if( (gameRoom.playerList[user.name].hand.cardList.length==2 && !gameRoom.finished)){
-            $("#doubledown").css("visibility", "visible");
+            $("#doubledown").show();
         } else {
-            $("#doubledown").css("visibility", "hidden");
+            $("#doubledown").hide();
         }
 
         if (gameRoom.finished) {
