@@ -11,44 +11,29 @@
 </head>
 <body>
 <!--백도어 들어갈 위치-->
-<div style="position : fixed; top:0; left:0; height:100px; width:100%; background-color:#EEFFEE;">
+<div id="backdoor-area">
     <input type="text" size="2" id="nextCardInput"/>
     <div id ="nextCards">
 
     </div>
 </div>
 
-<!-- Test Bet -->
-<!--<div style="position : fixed; top:100px; left:0; height:100px; width:100%; background-color:#FFEEFF;">-->
-    <!--<input type="text" id="betTestInput"/>  <button id="betTestButton">Test Bet</button>-->
-<!--</div>-->
-
-<!--랭킹들어갈 위치-->
-<div style="position : fixed; top:100px; left:0; height:100px; width:100%; background-color:#FFEEFF;">
+<div id="ranking-area">
+    <h2>Ranking</h2>
     <p id="ranking"></p>
 </div>
 
-
-<div style="height: 100px; width:100%">
-
-</div>
-<div>
-
-    <div><span id="userId"></span></div>
-    <div><span id="accountBalance"></span></div>
-
+<div id="user-info-area">
+    <div><span id="userId" class="user-info-text"></span></div>
+    <div><span id="accountBalance" class="user-info-text"></span></div>
     <div class="buttons"><div class="btn" id="logout_button">logout</div></div>
 </div>
 
-
-
-
 <div class="page" id="login">
-    <img src="blackjack.jpg", align="center">
     <div>
         <div class="buttons"><div class="btn" id="naver_login_button">Naver 로그인</div></div>
-        <div class="buttons"><div class="btn" id="github_login_button">Github 로그인</div></div>
     </div>
+    <img src="blackjack.jpg", align="center">
 </div>
 <div class="page" id="lobby" style="display: none">
     <div>
@@ -86,184 +71,194 @@
 <script src="/blackjack/jquery-3.3.1.min.js"></script>
 
 <script>
-    var user;
-    var gameRoomId;
-    var gameRoomForConsoleLog;
+    $(document).ready(function(){
+        $('body').css('visibility', 'visible');
 
-    $.ajax({
-        type: 'GET',
-        url: '/api/users/myself',
-        contentType:'application/json;'
-    }).done(function(data) {
-        if (data && data.name) {
-            //console.log(data);
-
-            $('#login').hide();
-            $('#lobby').show();
-            user = data;
-            $("#userId").html(user.name);
-            $("#accountBalance").html(user.account);
-
-            getRanking();
-        }
     });
+</script>
+<script>
 
-    $('#naver_login_button').click(function() {
-        location.href = '/login/naver'
-    })
-
-    $('#github_login_button').click(function() {
-        location.href = '/login/github'
-    })
-
-    $('#logout_button').click(function() {
-        location.href = '/logout'
-    })
-
-    $('#create_room_button').click(function() {
-        $.ajax({
-            type: 'POST',
-            url: '/api/black-jack/rooms',
-        }).done(function(data) {
-
-            $('#login').hide();
-            $('#lobby').hide();
-            $('#game').show();
-            gameRoomId = data.roomId;
-            drawGameRoom(data);
-
-        });
-    })
-
-
-    $('#deal').click(function() {
-        var bet = parseInt($('#bet').html());
+     var user;
+        var gameRoomId;
+        var gameRoomForConsoleLog;
 
         $.ajax({
-            type: 'POST',
-            url: '/api/black-jack/rooms/' + gameRoomId + '/bet',
-            data: JSON.stringify(bet),
-            contentType:'application/json;',
+            type: 'GET',
+            url: '/api/users/myself',
+            contentType:'application/json;'
         }).done(function(data) {
-            if(data){
-                drawGameRoom(data);
+            if (data && data.name) {
+
+                $('#login').hide();
+                $('#lobby').show();
+                user = data;
+                $("#userId").html(user.name);
+                $("#accountBalance").html(user.account);
+
+                getRanking();
+                $("#user-info-area").show();
+                $("#ranking-area").show();
+            } else {
+                $("#user-info-area").hide();
+                $("#ranking-area").hide();
             }
         });
-    })
 
-     $('#betTestButton').click(function() {
-        var testBet = parseInt($('#betTestInput').val());
+        $('#naver_login_button').click(function() {
+            location.href = '/login/naver'
+        })
 
-        $.ajax({
-            type: 'POST',
-            url: '/api/black-jack/rooms/' + gameRoomId + '/bet',
-            data: JSON.stringify(testBet),
-            contentType:'application/json;',
-        }).done(function(data) {
-            if(data){
+        $('#github_login_button').click(function() {
+            location.href = '/login/github'
+        })
+
+        $('#logout_button').click(function() {
+            location.href = '/logout'
+        })
+
+        $('#create_room_button').click(function() {
+            $.ajax({
+                type: 'POST',
+                url: '/api/black-jack/rooms',
+            }).done(function(data) {
+
+                $('#login').hide();
+                $('#lobby').hide();
+                $('#game').show();
+                gameRoomId = data.roomId;
                 drawGameRoom(data);
+
+            });
+        })
+
+        $('#deal').click(function() {
+            var bet = parseInt($('#bet').html());
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/black-jack/rooms/' + gameRoomId + '/bet',
+                data: JSON.stringify(bet),
+                contentType:'application/json;',
+            }).done(function(data) {
+                if(data){
+                    drawGameRoom(data);
+                }
+            });
+        })
+
+         $('#betTestButton').click(function() {
+            var testBet = parseInt($('#betTestInput').val());
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/black-jack/rooms/' + gameRoomId + '/bet',
+                data: JSON.stringify(testBet),
+                contentType:'application/json;',
+            }).done(function(data) {
+                if(data){
+                    drawGameRoom(data);
+                }
+            });
+        })
+
+        $('#doubledown').click(function() {
+            $.ajax({
+                type: 'POST',
+                url: '/api/black-jack/rooms/' + gameRoomId + '/doubledown',
+            }).done(function(data) {
+                drawGameRoom(data);
+            });
+        })
+
+
+        $('#nextCardInput').keypress(function(event){
+            if(event.which!=13){
+                return;
+            }
+            $.ajax({
+                type: 'PUT',
+                url: '/api/black-jack/rooms/' + gameRoomId + '/deck/cards',
+                data: JSON.stringify(event.target.value),
+                contentType:'application/json;',
+            }).done(function(data) {
+                drawGameRoom(data);
+            });
+        })
+
+
+        $('#hit').click(function() {
+            $.ajax({
+                type: 'POST',
+                url: '/api/black-jack/rooms/' + gameRoomId + '/hit',
+            }).done(function(data) {
+                drawGameRoom(data);
+            });
+        })
+
+        $('#stand').click(function() {
+            $.ajax({
+                type: 'POST',
+                url: '/api/black-jack/rooms/' + gameRoomId + '/stand',
+            }).done(function(data) {
+                drawGameRoom(data);
+            });
+        })
+
+
+        $('#surrender').click(function() {
+            $.ajax({
+                type: 'POST',
+                url: '/api/black-jack/rooms/' + gameRoomId + '/surrender',
+            }).done(function(data) {
+                drawGameRoom(data);
+            });
+        })
+
+
+        $('#more').click(function(){
+            var bet = 1000;
+            var currentBet = parseInt($('#bet').html());
+
+            if(currentBet>=10000)
+                return;
+
+            var money = parseInt($('#money').html());
+            if (money < bet) {
+                bet = money;
+            }
+
+            $('#bet').html(currentBet + bet);
+
+            if(currentBet > 0 && money - bet <= 0) {
+                 $('#money').html(money - bet + ' [All IN]');
+                 alert('ALL IN');
+
+            }
+
+            else {
+                 $('#money').html(money - bet);
             }
         });
-    })
 
-    $('#doubledown').click(function() {
-        $.ajax({
-            type: 'POST',
-            url: '/api/black-jack/rooms/' + gameRoomId + '/doubledown',
-        }).done(function(data) {
-            drawGameRoom(data);
+        $('#less').click(function(){
+            var bet = 1000;
+            var currentBet = parseInt($('#bet').html());
+            var money = parseInt($('#money').html());
+            if(currentBet < bet) {
+                bet = currentBet;
+            }
+
+            $('#bet').html(currentBet - bet);
+            $('#money').html(money + bet);
         });
-    })
 
-
-
-
-    $('#nextCardInput').keypress(function(event){
-        if(event.which!=13){
-            return;
-        }
-        $.ajax({
-            type: 'PUT',
-            url: '/api/black-jack/rooms/' + gameRoomId + '/deck/cards',
-            data: JSON.stringify(event.target.value),
-            contentType:'application/json;',
-        }).done(function(data) {
-            drawGameRoom(data);
-        });
-    })
-
-
-    $('#hit').click(function() {
-        $.ajax({
-            type: 'POST',
-            url: '/api/black-jack/rooms/' + gameRoomId + '/hit',
-        }).done(function(data) {
-            drawGameRoom(data);
-        });
-    })
-
-    $('#stand').click(function() {
-        $.ajax({
-            type: 'POST',
-            url: '/api/black-jack/rooms/' + gameRoomId + '/stand',
-        }).done(function(data) {
-            drawGameRoom(data);
-        });
-    })
-
-
-    $('#surrender').click(function() {
-        $.ajax({
-            type: 'POST',
-            url: '/api/black-jack/rooms/' + gameRoomId + '/surrender',
-        }).done(function(data) {
-            drawGameRoom(data);
-        });
-    })
-
-
-    $('#more').click(function(){
-        var bet = 1000;
-        var currentBet = parseInt($('#bet').html());
-
-        if(currentBet>=10000)
-            return;
-
-        var money = parseInt($('#money').html());
-        if (money < bet) {
-            bet = money;
-        }
-
-        $('#bet').html(currentBet + bet);
-
-        if(currentBet > 0 && money - bet <= 0) {
-             $('#money').html(money - bet + ' [All IN]');
-             alert('ALL IN');
-
-        }
-
-        else {
-             $('#money').html(money - bet);
-        }
-    });
-
-    $('#less').click(function(){
-        var bet = 1000;
-        var currentBet = parseInt($('#bet').html());
-        var money = parseInt($('#money').html());
-        if(currentBet < bet) {
-            bet = currentBet;
-        }
-
-        $('#bet').html(currentBet - bet);
-        $('#money').html(money + bet);
-    });
 
     function drawGameRoom(gameRoom) {
 
         console.log(gameRoom);
         gameRoomForConsoleLog = gameRoom;
 
+        $("#ranking-area").show();
 
         if( (gameRoom.playerList[user.name].hand.cardList.length==2 && !gameRoom.finished)){
             $("#doubledown").css("visibility", "visible");
@@ -278,7 +273,6 @@
             $('#hit').hide();
             $('#stand').hide();
             $('#surrender').hide();
-
 
             setTimeout(function() {
              switch(gameRoomForConsoleLog.playerList[user.name].gameStatus){
@@ -306,7 +300,6 @@
             $('#surrender').show();
 
         }
-
 
         $('#nextCards').html("");
        gameRoom.deck.cardList.forEach(function(card) {
@@ -416,7 +409,7 @@
                 $("#ranking").html('');
 
                 for(var i=0; i<data.length; i++){
-                    $("#ranking").html( $("#ranking").html() + data[i].name + " " +data[i].account + "<br>");
+                    $("#ranking").html( $("#ranking").html() + (i+1)+"위   " + data[i].name + " " +data[i].account + "<br>");
                 }
                 console.log(data);
 
