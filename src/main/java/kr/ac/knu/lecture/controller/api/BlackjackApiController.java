@@ -25,7 +25,6 @@ public class BlackjackApiController {
     @Autowired
     private UserRepository userRepository;
 
-
     @GetMapping("/ranking")
     public ArrayList<User> getRankingData() throws SQLException {
         return blackjackService.getAllUsers();

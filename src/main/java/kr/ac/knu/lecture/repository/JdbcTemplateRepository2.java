@@ -44,8 +44,6 @@ public class JdbcTemplateRepository2 {
         Connection connection = dataSource.getConnection();
         PreparedStatement pst = connection.prepareStatement("SELECT * FROM user order by account DESC");
 
-        pst.executeQuery();
-
         ResultSet rs = pst.executeQuery();
 
         ArrayList<User> users = new ArrayList<>();
@@ -53,6 +51,8 @@ public class JdbcTemplateRepository2 {
         while (rs.next()) {
             users.add(new User(rs.getString(1), null, null, rs.getLong(2)));
         }
+
+        connection.close();
 
         return users;
     }
