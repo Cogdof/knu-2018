@@ -90,6 +90,8 @@
         }).done(function(data) {
             if (data && data.name) {
 
+                console.log(data);
+
                 $('#login').hide();
                 $('#lobby').show();
                 user = data;
@@ -103,6 +105,7 @@
                 $("#user-info-area").hide();
                 $("#ranking-area").hide();
             }
+
         });
 
         $('#naver_login_button').click(function() {
@@ -351,6 +354,7 @@
              },500)
         }
 
+        $("#accountBalance").html(  gameRoom.playerList[$("#userId").html()].balance)
         getRanking();
     }
 
@@ -412,9 +416,15 @@
                 $("#ranking").html('');
 
                 for(var i=0; i<data.length; i++){
+
+                    if(data[i].name == $("#userId").html()){
+                        $("#accountBalance").html(data[i].account);
+                    }
+
                     $("#ranking").html( $("#ranking").html() + (i+1)+"위   " + data[i].name + " " +data[i].account + "<br>");
                 }
-                console.log(data);
+
+                <!--console.log(data);-->
 
             });
     }
