@@ -406,6 +406,22 @@
         color:white;
     }
 
+    #game-result-area {
+        position : fixed;
+                top:50%;
+                width:100%;
+                text-align:center;
+                    transform: skew(10deg,-10deg);
+                    display:none;
+    }
+
+    #game-result-area span{
+            font-size: 100px;
+                text-shadow: 0 0 20px black;
+                color: rgb(255, 201, 0);
+       }
+
+
 
     #game {
         background: transparent;
