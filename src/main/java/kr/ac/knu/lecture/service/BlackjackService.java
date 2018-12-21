@@ -59,6 +59,8 @@ public class BlackjackService {
         //blackjack
         gameRoom.checkBlackjack(user.getName());
 
+        updateGameResult(gameRoom);
+
         return gameRoom;
     }
 
