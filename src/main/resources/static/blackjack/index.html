@@ -23,6 +23,10 @@
     <span>끝난 후 메시지</span>
 </div>
 
+<div id="all-in-area">
+    <span>ALL IN</span>
+</div>
+
 <div id="ranking-area">
     <h2>Ranking</h2>
     <p id="ranking"></p>
@@ -244,6 +248,9 @@
 
 
         $('#more').click(function(){
+
+            $("#all-in-area").hide();
+
             var bet = 1000;
             var currentBet = parseInt($('#bet').html());
 
@@ -272,7 +279,9 @@
 
             if(currentBet > 0 && money - bet <= 0) {
                  $('#money').html(money - bet + ' [All IN]');
-                 alert('ALL IN');
+
+                 $("#all-in-area").show();
+
 
               $('#1000d').hide();
               $('#2000d').hide();
@@ -433,6 +442,8 @@
         $("#backdoor-area").show();
          $("#chip-area").show();
 
+        $("#all-in-area").hide();
+
 
         if( (gameRoom.playerList[user.name].hand.cardList.length==2 && !gameRoom.finished)){
             $("#doubledown").show();
@@ -526,7 +537,9 @@
              if(parseInt($('#bet').html()) > 0 && balance - parseInt($('#bet').html()) == 0) {
              $('#money').html( (balance - parseInt($('#bet').html())) + '[All IN]');
              setTimeout(function() {
-                alert('ALL IN');
+
+                $("#all-in-area").show();
+                <!--alert('ALL IN');-->
 
 
               $('#1000d').hide();
