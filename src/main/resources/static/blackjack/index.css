@@ -408,7 +408,7 @@
 
     #game-result-area {
                 position : fixed;
-                        top:50%;
+                        top:30%;
                         width:100%;
                         text-align:center;
                             transform: skew(10deg,-10deg);
