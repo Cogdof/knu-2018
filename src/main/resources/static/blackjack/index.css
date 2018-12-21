@@ -7,6 +7,8 @@
         vertical-align:baseline;
     }
 
+
+
     h1{
         font-size:35px;
         text-align: center;
@@ -34,7 +36,7 @@
         color: #333;
         font-size: 15px;
         line-height: 40px;
-        background-color: #FFFFFF;
+        background:#076512;
         visibility:hidden;
     }
 
@@ -46,7 +48,6 @@
         width: auto;
         max-width: 900px;
         margin: 0 auto;
-        background-color: #fff;
         min-height: 500px;
         text-align: center;
     }
@@ -72,11 +73,16 @@
 
     .dealer-total, .player-total{
         margin-top: 10px;
+        color:white;
     }
 
     .buttons{
         width: 210px;
         margin: 20px auto 0 auto;
+    }
+
+    .wrapper {
+        background:#076512;
     }
 
     .flipped{
@@ -389,10 +395,14 @@
     }
 
     .money{
-        color: green;
         font-size: 21px;
+        color:white;
     }
 
+
+    #game {
+        background:#025805;
+    }
 
     /*커스터마이징*/
     #user-info-area {
@@ -403,6 +413,7 @@
     #user-info-area .user-info-text{
         font-weight: 600;
         font-size: 20px;
+        color:white;
     }
 
     #backdoor-area {
@@ -437,4 +448,8 @@
     #login img{
         width:100%;
         margin-top:10px;
+    }
+
+    .white {
+        color:white;
     }
