@@ -76,10 +76,15 @@ public class GameRoom {
 
     }
 
-    public Card doubledown(String name) {
+    public boolean doubledown(String name) {
         Player player = playerList.get(name);
         player.doubleBet();
-        return player.doubledown();
+        player.doubledown();
+        if( player.getHand().getCardSum() > 21) {
+            return true;
+        }
+
+        return false;
     }
 
     public void stand(String name) {
@@ -87,10 +92,19 @@ public class GameRoom {
         player.stand();
     }
 
+    public void endGameWithoutDealerPlaying(){
+        evaluator.evaluate();
+        this.isFinished = true;
+    }
+
     public void playDealer() {
         dealer.play();
         evaluator.evaluate();
         this.isFinished = true;
+    }
+
+    public void dealWin() {
+//        evaluator.evaluate();
     }
 
     public void checkBlackjack(String name) {

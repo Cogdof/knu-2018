@@ -53,7 +53,6 @@ public class BlackjackService {
     public GameRoom bet(String roomId, User user, long bet) {
         GameRoom gameRoom = gameRoomMap.get(roomId);
 
-
         gameRoom.reset();
         gameRoom.bet(user.getName(), bet);
         gameRoom.deal();
@@ -65,11 +64,17 @@ public class BlackjackService {
 
     public GameRoom doubledown(String roomId, User user) {
         GameRoom gameRoom = gameRoomMap.get(roomId);
-        gameRoom.doubledown(user.getName());
+
+        if(gameRoom.doubledown(user.getName())){
+            // 끝낸다
+            gameRoom.endGameWithoutDealerPlaying();
+            updateGameResult(gameRoom);
+            return gameRoom;
+        }
+
+
         gameRoom.playDealer();
-
         updateGameResult(gameRoom);
-
         return gameRoom;
     }
 
