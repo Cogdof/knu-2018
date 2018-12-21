@@ -102,9 +102,11 @@
                 getRanking();
                 $("#user-info-area").show();
                 $("#ranking-area").show();
+                $("#backdoor-area").show();
             } else {
                 $("#user-info-area").hide();
                 $("#ranking-area").hide();
+                $("#backdoor-area").hide();
             }
 
         });
@@ -265,6 +267,7 @@
         gameRoomForConsoleLog = gameRoom;
 
         $("#ranking-area").show();
+        $("#backdoor-area").show();
 
         if( (gameRoom.playerList[user.name].hand.cardList.length==2 && !gameRoom.finished)){
             $("#doubledown").show();
@@ -279,7 +282,7 @@
             $('#hit').hide();
             $('#stand').hide();
             $('#surrender').hide();
-            $('#backdoor-area').hide();
+
             $('#nextCardInput').val('');
 
             setTimeout(function() {
@@ -305,7 +308,7 @@
             $('#hit').show();
             $('#stand').show();
             $('#surrender').show();
-            $('#backdoor-area').show();
+
         }
 
         $('#nextCards').html("");
