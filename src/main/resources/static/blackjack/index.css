@@ -437,9 +437,14 @@
         left:15px;
         height:250px;
         width:20%;
-        background-color:#EEFFEE;
+        background-color: rgba(200, 200, 200, 0.7);
         display:none;
         padding:15px;
+    }
+
+    #backdoor-area input {
+        border:none;
+        background-color: rgba(200, 200, 200, 0.7);
     }
 
     #ranking-area {
@@ -448,7 +453,8 @@
             right: 15px;
             height: 250px;
             width: 20%;
-            background-color: #FFEEFF;
+            background-color: rgba(200, 200, 200, 0.7);
+            color: black;
             display: none;
             padding: 15px;
     }
@@ -463,6 +469,7 @@
     #login img{
         width:100%;
         margin-top:10px;
+            opacity: 0.8;
     }
 
     .white {
