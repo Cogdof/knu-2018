@@ -343,17 +343,19 @@
         }
 
         if(gameRoom.finished){
-            $('#money').html( (balance - parseInt($('#bet').html())));
-        } else {
-            $('#money').html( (balance));
-        }
-
-        if(parseInt($('#bet').html()) > 0 && balance - parseInt($('#bet').html()) == 0) {
+             if(parseInt($('#bet').html()) > 0 && balance - parseInt($('#bet').html()) == 0) {
              $('#money').html( (balance - parseInt($('#bet').html())) + '[All IN]');
              setTimeout(function() {
                 alert('ALL IN');
              },500)
+             }
+             else {
+                $('#money').html( (balance - parseInt($('#bet').html())));
+            }
+        } else {
+            $('#money').html( (balance));
         }
+
 
         $("#accountBalance").html(  gameRoom.playerList[$("#userId").html()].balance)
         getRanking();
