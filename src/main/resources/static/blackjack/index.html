@@ -19,17 +19,6 @@
     </div>
 </div>
 
-
-<div id="chip-area">
-    <h2>Chip</h2>
-
-    <div id ="nextChip">
-        <img src="Images/blueCase1.png", align="center", id="chip">
-    </div>
-</div>
-
-
-
 <div id="ranking-area">
     <h2>Ranking</h2>
     <p id="ranking"></p>
@@ -73,12 +62,7 @@
         </div>
 
         <div class="clear"></div>
-
-
-
     </div>
-
-
     <div>
         <b class="white">Available Funds</b><br>
         <span id="money" class="money" class="white"></span>
@@ -118,11 +102,11 @@
                 getRanking();
                 $("#user-info-area").show();
                 $("#ranking-area").show();
-
+                $("#backdoor-area").show();
             } else {
                 $("#user-info-area").hide();
                 $("#ranking-area").hide();
-
+                $("#backdoor-area").hide();
             }
 
         });
@@ -150,7 +134,7 @@
                 $('#game').show();
                 gameRoomId = data.roomId;
                 drawGameRoom(data);
-                $("#chip-area").show();
+
             });
         })
 
@@ -283,6 +267,7 @@
         gameRoomForConsoleLog = gameRoom;
 
         $("#ranking-area").show();
+        $("#backdoor-area").show();
 
         if( (gameRoom.playerList[user.name].hand.cardList.length==2 && !gameRoom.finished)){
             $("#doubledown").show();
@@ -297,7 +282,6 @@
             $('#hit').hide();
             $('#stand').hide();
             $('#surrender').hide();
-            $('#backdoor-area').hide();
 
             $('#nextCardInput').val('');
 
@@ -324,8 +308,7 @@
             $('#hit').show();
             $('#stand').show();
             $('#surrender').show();
-            $('#backdoor-area').show();
-            $("#chip-area").show();
+
         }
 
         $('#nextCards').html("");
@@ -363,17 +346,19 @@
         }
 
         if(gameRoom.finished){
-            $('#money').html( (balance - parseInt($('#bet').html())));
-        } else {
-            $('#money').html( (balance));
-        }
-
-        if(parseInt($('#bet').html()) > 0 && balance - parseInt($('#bet').html()) == 0) {
+             if(parseInt($('#bet').html()) > 0 && balance - parseInt($('#bet').html()) == 0) {
              $('#money').html( (balance - parseInt($('#bet').html())) + '[All IN]');
              setTimeout(function() {
                 alert('ALL IN');
              },500)
+             }
+             else {
+                $('#money').html( (balance - parseInt($('#bet').html())));
+            }
+        } else {
+            $('#money').html( (balance));
         }
+
 
         $("#accountBalance").html(  gameRoom.playerList[$("#userId").html()].balance)
         getRanking();
