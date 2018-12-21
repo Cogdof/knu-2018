@@ -36,6 +36,7 @@ public class Evaluator {
             return true;
         }
 
+
         playerMap.forEach((s, player) -> {
             int playerResult = player.getHand().getCardSum();
             if (evaluateBlackjackDealer()) {
