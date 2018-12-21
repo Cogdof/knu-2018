@@ -19,6 +19,10 @@
     </div>
 </div>
 
+<div id="game-result-area">
+    <span>끝난 후 메시지</span>
+</div>
+
 <div id="ranking-area">
     <h2>Ranking</h2>
     <p id="ranking"></p>
@@ -451,27 +455,37 @@
             setTimeout(function() {
              switch(gameRoomForConsoleLog.playerList[user.name].gameStatus){
                 case 0 :
-                    alert('You Win');
+
+                    $('#game-result-area').show();
+                    $('#game-result-area span').html('You Win!');
+                    <!--alert('You Win');-->
                     break;
                 case 1 :
-                    alert('You Tie');
+                    $('#game-result-area').show();
+                    $('#game-result-area span').html('You Tie!');
+                    <!--alert('You Tie');-->
                     break;
                 case 2 :
-                    alert('You Lost');
+                    $('#game-result-area').show();
+                    $('#game-result-area span').html('You Lost!');
+                    <!--alert('You Lost');-->
                     break;
                  case 3 :
-                    alert('You Surrender');
+                    $('#game-result-area').show();
+                    $('#game-result-area span').html('You Surrender!');
+                    <!--alert('You Surrender');-->
                     break;
             }}, 300)
 
         } else {
+
+            $('#game-result-area').hide();
             $('#deal').hide();
             $('#more').hide();
             $('#less').hide();
             $('#hit').show();
             $('#stand').show();
             $('#surrender').show();
-
         }
 
         $('#nextCards').html("");

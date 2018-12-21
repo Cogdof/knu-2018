@@ -406,6 +406,22 @@
         color:white;
     }
 
+    #game-result-area {
+        position : fixed;
+                top:50%;
+                width:100%;
+                text-align:center;
+                    transform: skew(10deg,-10deg);
+                    display:none;
+    }
+
+    #game-result-area span{
+            font-size: 100px;
+                text-shadow: 0 0 20px black;
+                color: rgb(255, 201, 0);
+       }
+
+
 
     #game {
         background: transparent;
@@ -435,7 +451,7 @@
         position : fixed;
         top:10px;
         left:15px;
-        height:250px;
+        min-height:250px;
         width:20%;
         background-color: rgba(200, 200, 200, 0.7);
         display:none;
@@ -453,7 +469,7 @@
             position: fixed;
             top: 10px;
             right: 15px;
-            height: 250px;
+            min-height: 250px;
             width: 20%;
             background-color: rgba(200, 200, 200, 0.7);
             color: black;
