@@ -442,6 +442,19 @@
         padding:15px;
     }
 
+
+    #chip-area {
+        position : fixed;
+        top:300px;
+        left:15px;
+        height:250px;
+        width:20%;
+        background-color: rgba(200, 200, 200, 0.7);
+        display:none;
+        padding:15px;
+    }
+
+
     #backdoor-area input {
         border:none;
         background-color: rgba(200, 200, 200, 0.7);
@@ -458,6 +471,7 @@
             display: none;
             padding: 15px;
     }
+
         #ranking-area p {
             text-align:center;
         }
@@ -466,11 +480,18 @@
         text-align:center;
     }
 
-    #login img{
-        width:100%;
+    #chip img{
+        width:80%;
         margin-top:10px;
             opacity: 0.8;
     }
+
+    #login img{
+            width:100%;
+            margin-top:10px;
+                opacity: 0.8;
+        }
+
 
     .white {
         color:white;

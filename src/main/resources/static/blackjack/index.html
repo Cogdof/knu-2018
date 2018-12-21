@@ -19,6 +19,17 @@
     </div>
 </div>
 
+
+<div id="chip-area">
+    <h2>Chip</h2>
+
+    <div id ="nextChip">
+        <img src="Images/blueCase1.png", align="center", id="chip">
+    </div>
+</div>
+
+
+
 <div id="ranking-area">
     <h2>Ranking</h2>
     <p id="ranking"></p>
@@ -62,7 +73,12 @@
         </div>
 
         <div class="clear"></div>
+
+
+
     </div>
+
+
     <div>
         <b class="white">Available Funds</b><br>
         <span id="money" class="money" class="white"></span>
@@ -102,9 +118,11 @@
                 getRanking();
                 $("#user-info-area").show();
                 $("#ranking-area").show();
+
             } else {
                 $("#user-info-area").hide();
                 $("#ranking-area").hide();
+
             }
 
         });
@@ -132,7 +150,7 @@
                 $('#game').show();
                 gameRoomId = data.roomId;
                 drawGameRoom(data);
-
+                $("#chip-area").show();
             });
         })
 
@@ -280,6 +298,7 @@
             $('#stand').hide();
             $('#surrender').hide();
             $('#backdoor-area').hide();
+
             $('#nextCardInput').val('');
 
             setTimeout(function() {
@@ -306,6 +325,7 @@
             $('#stand').show();
             $('#surrender').show();
             $('#backdoor-area').show();
+            $("#chip-area").show();
         }
 
         $('#nextCards').html("");
