@@ -36,7 +36,7 @@
         color: #333;
         font-size: 15px;
         line-height: 40px;
-        background:#076512;
+        background: radial-gradient(#076512, #033304);
         visibility:hidden;
     }
 
@@ -82,7 +82,7 @@
     }
 
     .wrapper {
-        background:#076512;
+        background: transparent;
     }
 
     .flipped{
@@ -401,7 +401,7 @@
 
 
     #game {
-        background:#025805;
+        background: transparent;
     }
 
     /*커스터마이징*/
