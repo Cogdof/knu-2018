@@ -443,17 +443,6 @@
     }
 
 
-    #chip-area {
-        position : fixed;
-        top:300px;
-        left:15px;
-        height:250px;
-        width:20%;
-        background-color: rgba(200, 200, 200, 0.7);
-        display:none;
-        padding:15px;
-    }
-
 
     #backdoor-area input {
         border:none;
@@ -480,13 +469,53 @@
         text-align:center;
     }
 
-    #chip img{
-        width:80%;
+    #chip-area img{
+        position:absolute;
+
+
+        width:30%;
         margin-top:10px;
-            opacity: 0.8;
+        opacity: 0.8;
     }
 
+    .blue     {
+               top: 60px;
+               right: 20px;
+
+        }
+
+    .green     {
+                   top: 60px;
+                   left: 20px;
+
+            }
+
+            .red     {
+                           top: 60px;
+                          left: 20px;
+
+                    }
+    .black{
+         top: 120px;
+         left: 50px;
+    }
+
+
+
+    #chip-area {
+        position : fixed;
+        top:300px;
+        left:15px;
+        height:250px;
+        width:20%;
+        background-color: rgba(200, 200, 200, 0.7);
+        display:none;
+        padding:15px;
+    }
+
+
     #login img{
+
             width:100%;
             margin-top:10px;
                 opacity: 0.8;

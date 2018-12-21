@@ -24,6 +24,20 @@
     <p id="ranking"></p>
 </div>
 
+<div id="chip-area">
+    <h2>Chip</h2>
+
+        <img src="Images/blackCase.png"class="black" id="allin">
+        <img src="Images/blueCase1.png" class="blue" id="1000d">
+        <img src="Images/blueCase2.png"class="blue" id="2000d">
+        <img src="Images/blueCase3.png"class="blue" id="3000d">
+        <img src="Images/blueCase4.png"class="blue" id="4000d">
+        <img src="Images/GreenCase.png"class="green" id="10000d">
+        <img src="Images/redCase.png"class="red" id="5000d">
+        <img src="Images/redCase2.png"class="red" id="5000d2">
+
+</div>
+
 <div id="user-info-area">
 
     <span id="userId" class="user-info-text-left">최근용</span>
@@ -103,10 +117,12 @@
                 $("#user-info-area").show();
                 $("#ranking-area").show();
                 $("#backdoor-area").show();
+                 $("#chip-area").show();
             } else {
                 $("#user-info-area").hide();
                 $("#ranking-area").hide();
                 $("#backdoor-area").hide();
+                 $("#chip-area").hide();
             }
 
         });
@@ -227,8 +243,19 @@
             var bet = 1000;
             var currentBet = parseInt($('#bet').html());
 
+
+
             if(currentBet>=10000)
                 return;
+
+                $('#1000d').hide();
+              $('#2000d').hide();
+              $('#3000d').hide();
+              $('#4000d').hide();
+              $('#5000d').hide();
+               $('#5000d2').hide();
+              $('#10000d').hide();
+              $('#allin').hide();
 
             var money = parseInt($('#money').html());
             if (money < bet) {
@@ -237,15 +264,85 @@
 
             $('#bet').html(currentBet + bet);
 
+
+
             if(currentBet > 0 && money - bet <= 0) {
                  $('#money').html(money - bet + ' [All IN]');
                  alert('ALL IN');
+
+              $('#1000d').hide();
+              $('#2000d').hide();
+              $('#3000d').hide();
+              $('#4000d').hide();
+              $('#5000d').hide();
+               $('#5000d2').hide();
+              $('#10000d').hide();
+              $('#allin').show();
 
             }
 
             else {
                  $('#money').html(money - bet);
+
+                  var chipBet = parseInt($('#bet').html());
+
+
+
+                $('#1000d').hide();
+              $('#2000d').hide();
+              $('#3000d').hide();
+              $('#4000d').hide();
+              $('#5000d').hide();
+               $('#5000d2').hide();
+              $('#10000d').hide();
+              $('#allin').hide();
+
+            if(chipBet==1000){
+
+              $('#1000d').show();
+
             }
+            else if(chipBet==2000){
+                  $('#2000d').show();
+            }
+             else if(chipBet==3000){
+                  $('#3000d').show();
+            }
+             else if(chipBet==4000){
+                  $('#4000d').show();
+            }
+
+             else if(chipBet==5000){
+                  $('#5000d').show();
+            }
+
+             else if(chipBet==6000){
+                  $('#5000d').show();
+                  $('#1000d').show();
+
+            }
+
+             else if(chipBet==7000){
+                  $('#5000d').show();
+                  $('#2000d').show();
+            }
+
+             else if(chipBet==8000){
+                  $('#5000d').show();
+                  $('#3000d').show();
+            }
+
+             else if(chipBet==9000){
+                  $('#5000d').show();
+                  $('#4000d').show();
+            }
+
+             else if(chipBet==10000){
+                  $('#10000d').show();
+              }
+            }
+
+
         });
 
         $('#less').click(function(){
@@ -257,7 +354,69 @@
             }
 
             $('#bet').html(currentBet - bet);
+
+
+              var chipBet = parseInt($('#bet').html());
+
+
+
+
             $('#money').html(money + bet);
+
+
+
+                $('#1000d').hide();
+              $('#2000d').hide();
+              $('#3000d').hide();
+              $('#4000d').hide();
+              $('#5000d').hide();
+               $('#5000d2').hide();
+              $('#10000d').hide();
+              $('#allin').hide();
+
+            if(chipBet==1000){
+
+              $('#1000d').show();
+
+            }
+            else if(chipBet==2000){
+                  $('#2000d').show();
+            }
+             else if(chipBet==3000){
+                  $('#3000d').show();
+            }
+             else if(chipBet==4000){
+                  $('#4000d').show();
+            }
+
+             else if(chipBet==5000){
+                  $('#5000d').show();
+            }
+
+             else if(chipBet==6000){
+                  $('#5000d').show();
+                  $('#1000d').show();
+
+            }
+
+             else if(chipBet==7000){
+                  $('#5000d').show();
+                  $('#2000d').show();
+            }
+
+             else if(chipBet==8000){
+                  $('#5000d').show();
+                  $('#3000d').show();
+            }
+
+             else if(chipBet==9000){
+                  $('#5000d').show();
+                  $('#4000d').show();
+            }
+
+             else if(chipBet==10000){
+                  $('#10000d').show();
+              }
         });
 
 
@@ -268,12 +427,16 @@
 
         $("#ranking-area").show();
         $("#backdoor-area").show();
+         $("#chip-area").show();
+
 
         if( (gameRoom.playerList[user.name].hand.cardList.length==2 && !gameRoom.finished)){
             $("#doubledown").show();
         } else {
             $("#doubledown").hide();
         }
+
+
 
         if (gameRoom.finished) {
             $('#deal').show();
@@ -350,6 +513,18 @@
              $('#money').html( (balance - parseInt($('#bet').html())) + '[All IN]');
              setTimeout(function() {
                 alert('ALL IN');
+
+
+              $('#1000d').hide();
+              $('#2000d').hide();
+              $('#3000d').hide();
+              $('#4000d').hide();
+              $('#5000d').hide();
+               $('#5000d2').hide();
+              $('#10000d').hide();
+              $('#allin').show();
+
+
              },500)
              }
              else {
@@ -358,6 +533,8 @@
         } else {
             $('#money').html( (balance));
         }
+
+
 
 
         $("#accountBalance").html(  gameRoom.playerList[$("#userId").html()].balance)
