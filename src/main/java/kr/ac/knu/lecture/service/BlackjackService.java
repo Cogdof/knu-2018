@@ -132,4 +132,13 @@ public class BlackjackService {
         ArrayList<User> users = jdbcTemplateRepository2.getAllUsersOrderByAccount();
         return users;
     }
+
+    public GameRoom revive(String roomId, User user) {
+        GameRoom gameRoom = gameRoomMap.get(roomId);
+
+        gameRoom.revive(user.getName());
+
+        updateGameResult(gameRoom);
+        return gameRoom;
+    }
 }

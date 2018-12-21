@@ -105,4 +105,11 @@ public class Player {
         currentBet = 0;
         this.isPlaying = false;
     }
+
+    public void revive() {
+        gameStatus = -1;
+        if(balance==0&&currentBet==0) {
+            balance = 15000;
+        }
+    }
 }

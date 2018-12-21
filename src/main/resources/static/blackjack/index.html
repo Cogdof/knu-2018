@@ -46,10 +46,13 @@
     <div class="dealer-cards"></div>
     <div class="clear"></div>
     <div class="player-cards"></div>
-    <div class="buttons"><div class="btn" id="hit">Hit</div><div class="btn" id="stand">Stand</div></div>
+    <div class="buttons">
+        <div class="btn" id="hit">Hit</div>
+        <div class="btn" id="stand">Stand</div>
+        <div class="btn" id="surrender">Surrender</div>
+    </div>
     <div class="buttons"><div class="btn" id="deal">Deal</div></div>
     <div class="buttons"><div class="btn" id="doubledown">Doubledown</div></div>
-    <div class="buttons"><div class="btn" id="surrender">Surrender</div></div>
 
     <div class="betting-area">
         <div><b id="GameResult"></b></div>
@@ -66,6 +69,7 @@
     <div>
         <b class="white">Available Funds</b><br>
         <span id="money" class="money" class="white"></span>
+        <div class="btn" id="revive">Revive</div>
         <div class="clear"></div>
     </div>
 </div>
@@ -260,6 +264,15 @@
             $('#money').html(money + bet);
         });
 
+        $('#revive').click(function(){
+            $.ajax({
+                type: 'POST',
+                url: '/api/black-jack/rooms/' + gameRoomId + '/revive',
+            }).done(function(data) {
+                drawGameRoom(data);
+            });
+        });
+
 
     function drawGameRoom(gameRoom) {
 
@@ -283,6 +296,12 @@
             $('#stand').hide();
             $('#surrender').hide();
 
+            if(gameRoom.playerList[user.name].balance == 0){
+                $("#revive").show();
+            }else{
+                $("#revive").hide();
+            }
+
             $('#nextCardInput').val('');
 
             setTimeout(function() {
@@ -296,8 +315,10 @@
                 case 2 :
                     alert('You Lost');
                     break;
-                 case 3 :
+                case 3 :
                     alert('You Surrender');
+                    break;
+                default:
                     break;
             }}, 300)
 
@@ -347,10 +368,10 @@
 
         if(gameRoom.finished){
              if(parseInt($('#bet').html()) > 0 && balance - parseInt($('#bet').html()) == 0) {
-             $('#money').html( (balance - parseInt($('#bet').html())) + '[All IN]');
-             setTimeout(function() {
-                alert('ALL IN');
-             },500)
+                $('#money').html( (balance - parseInt($('#bet').html())) + '[All IN]');
+                setTimeout(function() {
+                    alert('ALL IN');
+                },500)
              }
              else {
                 $('#money').html( (balance - parseInt($('#bet').html())));
@@ -360,7 +381,8 @@
         }
 
 
-        $("#accountBalance").html(  gameRoom.playerList[$("#userId").html()].balance)
+        $("#accountBalance").html(  gameRoom.playerList[$("#userId").html()].balance);
+
         getRanking();
     }
 

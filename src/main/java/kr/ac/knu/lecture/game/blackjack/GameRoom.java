@@ -111,4 +111,9 @@ public class GameRoom {
 
 
     }
+
+    public void revive(String name) {
+        Player player = playerList.get(name);
+        player.revive();
+    }
 }

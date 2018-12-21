@@ -84,7 +84,7 @@
     }
 
     .buttons{
-        width: 210px;
+        max-width: 400px;
         margin: 10px auto 0 auto;
     }
 
